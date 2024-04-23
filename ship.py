@@ -7,10 +7,11 @@ class Ship:
 
         self.screen = ai_game.screen
         self.settings = ai_game.settings
-        self.screen_rect = ai_game.screen_get_rect()
+        self.screen_rect = ai_game.screen.get_rect()
 
         #Load ship imag
-        self.image = pygame.image.load('/Users/ernestomartinez/Documents/GitHub/Alien-Invastion-Game/ship.png')
+        original_image = pygame.image.load('/Users/ernestomartinez/Documents/GitHub/Alien-Invastion-Game/ship.png')
+        self.image = pygame.transform.scale(original_image, (100, 100))
         self.rect = self.image.get_rect()
 
         #Start each new ship at bottom center

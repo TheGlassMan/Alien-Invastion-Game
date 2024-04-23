@@ -10,10 +10,10 @@ class AlienInvasion:
         pygame.init()
         self.settings = Settings()
         self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
-        self.screen = pygame.display.set_mode((1200,800))
+       # self.screen = pygame.display.set_mode((1200,800))
         pygame.display.set_caption("Ernesto's Alien Invasion")
 
-        self.bg_color = (50,230,230)
+       # self.bg_color = (50,230,230)
 
         self.ship = Ship(self)
 
