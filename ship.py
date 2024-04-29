@@ -10,7 +10,7 @@ class Ship:
         self.screen_rect = ai_game.screen.get_rect()
 
         #Load ship imag
-        original_image = pygame.image.load('/Users/ernestomartinez/Documents/GitHub/Alien-Invastion-Game/ship.png')
+        original_image = pygame.image.load('ship.png')
         self.image = pygame.transform.scale(original_image, (100, 100))
         self.rect = self.image.get_rect()
 
@@ -35,3 +35,7 @@ class Ship:
     def blitme(self):
         #Draw ship in POS
         self.screen.blit(self.image, self.rect)
+    
+    def center_ship(self):
+        self.rect.midbottom = self.screen_rect.midbottom
+        self.x = float(self.rect.x)
