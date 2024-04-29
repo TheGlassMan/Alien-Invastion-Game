@@ -6,7 +6,7 @@ class Settings:
         #Screen Settings
         self.screen_width = 1200
         self.screen_height = 800
-        self.bg_color = (10,230,230)
+        self.bg = None
 
         #Ship Settings
         self.ship_speed = 7.0
@@ -20,10 +20,15 @@ class Settings:
         self.bullets_allowed = 3
 
         # alien settings
-        self.alien_speed = 10
+        self.alien_speed = 20
         self.fleet_drop_speed = 30
         # fleet direction of 1 represents right; -1 represents left.
         self.fleet_direction = 1
         #Framerate 
         self.clock = pygame.time.Clock()
         self.fps = 60
+    def load_background(self):
+        self.bg = pygame.image.load('/Users/ernestomartinez/Documents/GitHub/Alien-Invastion-Game/space.jpeg).convert()')
+
+    def get_background_width(self):
+        return self.bg.get_width()
