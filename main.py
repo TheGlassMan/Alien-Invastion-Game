@@ -6,7 +6,6 @@ from bullet import Bullet
 from alien import Alien
 from game_stats import GameStats
 from time import sleep
-import math
 
 class AlienInvasion:
     def __init__(self):
@@ -14,15 +13,13 @@ class AlienInvasion:
 
         pygame.init()
         self.settings = Settings()
-        self.settings.load_background("space.jpeg")
         # Screen Settings
         self.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
         self.settings.screen_width = self.screen.get_rect().width
         self.settings.screen_height = self.screen.get_rect().height
 
         pygame.display.set_caption("Ernesto's Alien Invasion")
-        self.scroll = 0
-        self.titles = math.ceil(self.settings.screen_width / self.settings.bg.get_width()) + 1
+
        # self.bg_color = (50,230,230)
         self.stats = GameStats(self)
         self.ship = Ship(self)
@@ -41,16 +38,6 @@ class AlienInvasion:
                 self._update_bullets()
                 self._update_aliens()
             self._update_screen()
-    
-    def scroll_background(self):
-        i = 0
-        while i < self.titles:
-            self.screen.blit(self.settings.bg, (self.settings.bg.get_width() * i + self.scroll, 0))
-            i += 1
-        self.scroll -= 6
-        if abs(self.scroll) > self.settings.bg.get_width():
-            self.scroll = 0
-    
     def _check_events(self):
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -158,13 +145,26 @@ class AlienInvasion:
              
 
     def _update_screen(self):
-        self.screen.fill(self.settings.bg_color)
+
+        bg = pygame.image.load('space.png')
+        # Scale background to fit the screen size
+        bg = pygame.transform.scale(bg, (self.settings.screen_width, self.settings.screen_height))
+        # Draw background
+        self.screen.blit(bg, (0, 0))
         self.ship.blitme()
         for bullet in self.bullets.sprites():
              bullet.draw_bullet()
         self.aliens.draw(self.screen)
+        if not self.stats.game_active:
+            self._draw_game_over()
         pygame.display.flip()
 
+    def _draw_game_over(self):
+        font = pygame.font.SysFont(None, 48)
+        game_over_text = font.render("Game Over", True, (255, 0, 0))
+        game_over_rect = game_over_text.get_rect()
+        game_over_rect.center = self.screen.get_rect().center
+        self.screen.blit(game_over_text, game_over_rect)
 
 if __name__ == '__main__':
     ai = AlienInvasion()
