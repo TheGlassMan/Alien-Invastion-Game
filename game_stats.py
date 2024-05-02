@@ -5,5 +5,7 @@ class GameStats:
 
         self.game_active = True
 
+        self.aliens_killed = 0
+
     def reset_stats(self):
         self.ships_left = self.settings.ship_limit
